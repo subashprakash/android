@@ -1,0 +1,46 @@
+package com.example.hey;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+
+public class Splash extends Activity{
+
+  @Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.aart);
+		//To start a media to run on ur app do this ..A background sound etc can be given	
+		MediaPlayer oursong = MediaPlayer.create(Splash.this,R.raw.hi);
+		//You can use obj.release(); also to end as soon as splash screen ends or u have play it thru as app runs
+		oursong.start();
+		//This is the basic function where in how a splash works 
+		Thread timer = new Thread(){
+		public void run(){
+			try{sleep(5000);
+	        }
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			finally{
+			     //A intent activity is created this is where the app will start so copy the exact "com.example.hey.MAIN" exact as urs 
+				Intent openactivity = new Intent("com.example.hey.MAIN");
+				startActivity(openactivity);
+			}
+		}
+		
+	};
+	timer.start();
+}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		//it pauses the splas after 5 secs 
+		super.onPause();
+		finish();
+	}
+	
+}
